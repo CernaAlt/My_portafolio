@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Carlos Mendoza — Desarrollador Full Stack</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#0c0c0e;--bg2:#131316;--bg3:#1a1a1f;
+  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);
+  --accent:#c8a96e;--accent2:#e8c98a;
+  --text:#f0ede8;--muted:#888683;--muted2:#555350;--card:#16161b;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-weight:300;line-height:1.6;overflow-x:hidden;}
+
+/* ── SHARED ── */
+.section-eyebrow{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:14px;}
+.section-title{font-family:'Playfair Display',serif;font-size:38px;font-weight:600;color:var(--text);line-height:1.2;}
+.section-sub{font-size:14px;color:var(--muted);margin-top:12px;max-width:500px;line-height:1.75;}
+.btn-primary{background:var(--accent);color:var(--bg);font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:13px 28px;border-radius:2px;border:none;cursor:pointer;transition:background .2s;font-family:'DM Sans',sans-serif;}
+.btn-primary:hover{background:var(--accent2);}
+.btn-ghost{background:none;color:var(--muted);font-size:12px;font-weight:400;letter-spacing:.06em;text-transform:uppercase;padding:13px 20px;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:color .2s;font-family:'DM Sans',sans-serif;}
+.btn-ghost:hover{color:var(--text);}
+.btn-ghost::after{content:'→';font-size:14px;}
+.btn-outline{font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);border:.5px solid rgba(200,169,110,.3);padding:10px 22px;border-radius:2px;cursor:pointer;background:none;transition:background .2s;font-family:'DM Sans',sans-serif;}
+.btn-outline:hover{background:rgba(200,169,110,.08);}
+
+/* ── NAV ── */
+nav{display:flex;align-items:center;justify-content:space-between;padding:20px 64px;border-bottom:.5px solid var(--border);position:sticky;top:0;background:rgba(12,12,14,0.92);backdrop-filter:blur(14px);z-index:100;}
+.nav-logo{font-family:'Playfair Display',serif;font-weight:600;font-size:20px;letter-spacing:.02em;color:var(--text);text-decoration:none;}
+.nav-logo span{color:var(--accent);}
+.nav-links{display:flex;gap:36px;list-style:none;}
+.nav-links a{font-size:13px;font-weight:400;color:var(--muted);text-decoration:none;letter-spacing:.06em;text-transform:uppercase;transition:color .2s;}
+.nav-links a:hover{color:var(--text);}
+
+/* ── HERO ── */
+.hero{padding:100px 64px 88px;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;border-bottom:.5px solid var(--border);position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-140px;right:-100px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(200,169,110,0.055) 0%,transparent 70%);pointer-events:none;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);border:.5px solid rgba(200,169,110,.3);padding:6px 14px;border-radius:2px;margin-bottom:28px;}
+.hero-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);}
+.hero h1{font-family:'Playfair Display',serif;font-size:54px;font-weight:600;line-height:1.13;color:var(--text);margin-bottom:20px;letter-spacing:-.01em;}
+.hero h1 em{font-style:italic;color:var(--accent);}
+.hero p{font-size:15px;color:var(--muted);line-height:1.75;max-width:440px;margin-bottom:36px;}
+.hero-btns{display:flex;gap:14px;align-items:center;}
+.hero-stats{display:flex;gap:44px;margin-top:52px;padding-top:36px;border-top:.5px solid var(--border);}
+.stat-num{font-family:'Playfair Display',serif;font-size:32px;font-weight:600;color:var(--text);}
+.stat-num span{color:var(--accent);font-size:20px;}
+.stat-label{font-size:12px;color:var(--muted);letter-spacing:.05em;margin-top:2px;}
+.hero-visual{display:flex;justify-content:center;}
+.hero-img{width:100%;max-width:360px;aspect-ratio:4/5;background:var(--bg3);border:.5px solid var(--border2);border-radius:4px;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;position:relative;}
+.hero-img-bg{position:absolute;inset:0;background:linear-gradient(135deg,#1a1a1f 0%,#0e0e12 100%);}
+.hero-img-ring{position:absolute;top:28px;right:28px;width:90px;height:90px;border-radius:50%;border:.5px solid rgba(200,169,110,.18);}
+.hero-img-line{position:absolute;bottom:90px;left:20px;width:130px;height:.5px;background:linear-gradient(90deg,var(--accent),transparent);}
+.hero-img-label{position:relative;z-index:2;padding:18px 20px;background:rgba(12,12,14,.88);border-top:.5px solid var(--border);font-size:11px;letter-spacing:.08em;color:var(--muted);text-transform:uppercase;display:flex;justify-content:space-between;align-items:center;}
+.hero-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);}
+
+/* ── ABOUT ── */
+.about-section{padding:72px 64px;display:grid;grid-template-columns:auto 1fr;gap:52px;align-items:center;border-bottom:.5px solid var(--border);background:var(--bg2);}
+.about-avatar-wrap{position:relative;}
+.about-avatar{width:120px;height:120px;border-radius:50%;background:var(--bg3);border:.5px solid var(--border2);overflow:hidden;display:flex;align-items:flex-end;justify-content:center;}
+.avatar-body{width:72px;height:72px;background:var(--bg);border-radius:50% 50% 0 0;}
+.avatar-ring{position:absolute;inset:-7px;border-radius:50%;border:.5px solid rgba(200,169,110,.2);}
+.about-name{font-family:'Playfair Display',serif;font-size:27px;font-weight:600;color:var(--text);margin-bottom:4px;}
+.about-role{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:14px;}
+.about-bio{font-size:14px;color:var(--muted);line-height:1.8;max-width:600px;}
+.about-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px;}
+.tag{font-size:11px;letter-spacing:.06em;color:var(--muted);border:.5px solid var(--border2);padding:4px 12px;border-radius:2px;}
+
+/* ── FEATURES ── */
+.features-section{padding:88px 64px;border-bottom:.5px solid var(--border);}
+.section-header-center{text-align:center;margin-bottom:52px;}
+.section-header-center .section-sub{margin-left:auto;margin-right:auto;}
+.features-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--border);border:.5px solid var(--border);border-radius:4px;overflow:hidden;}
+.feat-card{background:var(--card);padding:36px 28px;display:flex;flex-direction:column;gap:14px;transition:background .2s;}
+.feat-card:hover{background:var(--bg3);}
+.feat-num{font-family:'Playfair Display',serif;font-size:42px;font-weight:600;color:rgba(200,169,110,.13);line-height:1;}
+.feat-title{font-size:15px;font-weight:500;color:var(--text);}
+.feat-desc{font-size:13px;color:var(--muted);line-height:1.75;}
+.feat-arrow{font-size:18px;color:var(--accent);margin-top:auto;padding-top:12px;}
+
+/* ── PROJECTS ── */
+.projects-section{padding:88px 64px;border-bottom:.5px solid var(--border);}
+.projects-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:52px;}
+.projects-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--border);border:.5px solid var(--border);border-radius:4px;overflow:hidden;}
+.proj-card{background:var(--card);display:flex;flex-direction:column;cursor:pointer;transition:background .2s;}
+.proj-card:hover{background:var(--bg3);}
+.proj-card:hover .proj-arrow{color:var(--accent);}
+.proj-thumb{width:100%;aspect-ratio:16/9;background:var(--bg3);border-bottom:.5px solid var(--border);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.proj-thumb-bg{position:absolute;inset:0;}
+.proj-thumb.t1 .proj-thumb-bg{background:linear-gradient(135deg,#0e1420,#131c2e);}
+.proj-thumb.t2 .proj-thumb-bg{background:linear-gradient(135deg,#120e1a,#1c1428);}
+.proj-thumb.t3 .proj-thumb-bg{background:linear-gradient(135deg,#0e1a14,#132018);}
+.proj-thumb-grid{position:absolute;inset:0;opacity:.14;background-image:linear-gradient(var(--border2) 1px,transparent 1px),linear-gradient(90deg,var(--border2) 1px,transparent 1px);background-size:40px 40px;}
+.proj-thumb-label{position:relative;z-index:2;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.22);}
+.proj-tag-badge{position:absolute;top:14px;left:14px;z-index:3;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);border:.5px solid rgba(200,169,110,.25);padding:4px 10px;border-radius:2px;background:rgba(12,12,14,.75);}
+.proj-body{padding:26px;}
+.proj-title{font-size:17px;font-weight:500;color:var(--text);margin-bottom:8px;}
+.proj-desc{font-size:13px;color:var(--muted);line-height:1.75;margin-bottom:16px;}
+.proj-footer{display:flex;justify-content:space-between;align-items:center;}
+.proj-stack{display:flex;gap:6px;flex-wrap:wrap;}
+.proj-chip{font-size:10px;letter-spacing:.05em;color:var(--muted2);border:.5px solid var(--border);padding:3px 9px;border-radius:2px;}
+.proj-arrow{font-size:16px;color:var(--muted2);transition:color .2s;}
+.proj-card.featured{grid-column:1/-1;flex-direction:row;}
+.proj-card.featured .proj-thumb{width:44%;aspect-ratio:auto;min-height:240px;border-bottom:none;border-right:.5px solid var(--border);}
+.proj-card.featured .proj-body{flex:1;padding:36px;}
+.proj-card.featured .proj-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:600;}
+.proj-badges{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;}
+.proj-badge-accent{font-size:11px;letter-spacing:.06em;color:var(--accent);border:.5px solid rgba(200,169,110,.25);padding:4px 10px;border-radius:2px;}
+.proj-badge-muted{font-size:11px;letter-spacing:.06em;color:var(--muted);border:.5px solid var(--border);padding:4px 10px;border-radius:2px;}
+
+/* ── EXPERIENCE ── */
+.exp-section{padding:88px 64px;background:var(--bg2);border-bottom:.5px solid var(--border);}
+.exp-layout{display:grid;grid-template-columns:1fr 1fr;gap:72px;margin-top:52px;}
+.timeline{position:relative;padding-left:0;}
+.timeline-track{position:absolute;left:11px;top:0;bottom:0;width:.5px;background:var(--border2);}
+.exp-item{position:relative;padding-left:38px;padding-bottom:44px;}
+.exp-item:last-child{padding-bottom:0;}
+.exp-dot{position:absolute;left:0;top:4px;width:24px;height:24px;border-radius:50%;background:var(--bg2);border:.5px solid var(--border2);display:flex;align-items:center;justify-content:center;}
+.exp-dot.active{border-color:var(--accent);background:rgba(200,169,110,.08);}
+.exp-dot-inner{width:8px;height:8px;border-radius:50%;background:var(--muted2);}
+.exp-dot.active .exp-dot-inner{background:var(--accent);}
+.exp-period{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted2);margin-bottom:6px;}
+.exp-role{font-size:16px;font-weight:500;color:var(--text);margin-bottom:4px;}
+.exp-company{font-size:13px;color:var(--accent);margin-bottom:10px;}
+.exp-detail{font-size:13px;color:var(--muted);line-height:1.75;}
+.edu-cards{display:flex;flex-direction:column;gap:10px;margin-top:36px;}
+.edu-label{font-size:12px;font-weight:500;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px;}
+.edu-card{background:var(--card);border:.5px solid var(--border);border-radius:4px;padding:16px 18px;display:flex;gap:14px;align-items:flex-start;}
+.edu-icon{width:36px;height:36px;min-width:36px;border-radius:2px;background:rgba(200,169,110,.06);border:.5px solid rgba(200,169,110,.15);display:flex;align-items:center;justify-content:center;font-size:15px;}
+.edu-name{font-size:14px;font-weight:500;color:var(--text);}
+.edu-inst{font-size:12px;color:var(--muted);margin-top:2px;}
+.edu-year{font-size:11px;color:var(--accent);margin-top:4px;letter-spacing:.06em;}
+.skills-block{display:flex;flex-direction:column;}
+.skills-title{font-size:12px;font-weight:500;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:20px;}
+.skill-row{display:flex;flex-direction:column;gap:6px;padding:16px 0;border-bottom:.5px solid var(--border);}
+.skill-row:last-of-type{border-bottom:none;}
+.skill-top{display:flex;justify-content:space-between;align-items:baseline;}
+.skill-name{font-size:14px;color:var(--text);}
+.skill-pct{font-size:12px;color:var(--muted2);}
+.skill-bar{height:2px;background:var(--border2);border-radius:1px;overflow:hidden;}
+.skill-fill{height:100%;border-radius:1px;background:linear-gradient(90deg,var(--accent),var(--accent2));}
+.stat-mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:28px;}
+.stat-mini{background:var(--card);border:.5px solid var(--border);border-radius:4px;padding:18px;}
+.stat-mini-num{font-family:'Playfair Display',serif;font-size:28px;font-weight:600;color:var(--text);}
+.stat-mini-num span{color:var(--accent);font-size:16px;}
+.stat-mini-label{font-size:11px;color:var(--muted);letter-spacing:.05em;margin-top:4px;}
+
+/* ── PROCESO ── */
+.proceso-section{padding:88px 64px;border-bottom:.5px solid var(--border);position:relative;overflow:hidden;}
+.proceso-section::before{content:'';position:absolute;top:-100px;left:-100px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(200,169,110,0.04) 0%,transparent 70%);pointer-events:none;}
+.proceso-header{margin-bottom:68px;}
+.proceso-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;position:relative;}
+.proceso-steps::before{content:'';position:absolute;top:27px;left:calc(12.5% + 12px);right:calc(12.5% + 12px);height:.5px;background:linear-gradient(90deg,transparent,var(--border2) 15%,var(--border2) 85%,transparent);z-index:0;}
+.step{display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 16px;position:relative;z-index:1;}
+.step-num-wrap{position:relative;margin-bottom:22px;}
+.step-num{width:56px;height:56px;border-radius:50%;border:.5px solid var(--border2);background:var(--bg2);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:18px;font-weight:600;color:var(--muted);transition:all .3s;cursor:default;}
+.step:hover .step-num{border-color:var(--accent);color:var(--accent);background:rgba(200,169,110,.07);}
+.step-num.active{border-color:var(--accent);color:var(--accent);background:rgba(200,169,110,.09);}
+.step-pulse{position:absolute;inset:-6px;border-radius:50%;border:.5px solid rgba(200,169,110,.22);animation:pulse 2.6s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:0;transform:scale(.9);}50%{opacity:1;transform:scale(1);}}
+.step-icon{font-size:20px;margin-bottom:10px;}
+.step-title{font-size:14px;font-weight:500;color:var(--text);margin-bottom:8px;}
+.step-desc{font-size:12px;color:var(--muted);line-height:1.75;}
+.step-duration{display:inline-block;margin-top:10px;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);border:.5px solid rgba(200,169,110,.2);padding:3px 10px;border-radius:20px;}
+.proceso-strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--border);border:.5px solid var(--border);border-radius:4px;overflow:hidden;margin-top:52px;}
+.strip-item{background:var(--card);padding:24px;display:flex;align-items:flex-start;gap:14px;}
+.strip-icon{width:36px;height:36px;min-width:36px;border-radius:2px;background:rgba(200,169,110,.06);border:.5px solid rgba(200,169,110,.15);display:flex;align-items:center;justify-content:center;font-size:15px;}
+.strip-title{font-size:13px;font-weight:500;color:var(--text);margin-bottom:4px;}
+.strip-desc{font-size:12px;color:var(--muted);line-height:1.65;}
+
+/* ── TESTIMONIALS ── */
+.testi-section{padding:88px 64px;background:var(--bg2);border-bottom:.5px solid var(--border);}
+.testi-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;}
+.testi-card{background:var(--card);border:.5px solid var(--border);border-radius:4px;padding:28px;display:flex;flex-direction:column;gap:16px;transition:border-color .2s;}
+.testi-card:hover{border-color:var(--border2);}
+.testi-stars{color:var(--accent);font-size:13px;letter-spacing:2px;}
+.testi-quote{font-size:14px;color:var(--muted);line-height:1.8;font-style:italic;}
+.testi-author{display:flex;align-items:center;gap:12px;padding-top:12px;border-top:.5px solid var(--border);}
+.testi-avatar{width:36px;height:36px;border-radius:50%;background:var(--bg3);border:.5px solid var(--border2);overflow:hidden;display:flex;align-items:flex-end;justify-content:center;}
+.testi-avatar-body{width:22px;height:22px;background:var(--bg);border-radius:50% 50% 0 0;}
+.testi-name{font-size:13px;font-weight:500;color:var(--text);}
+.testi-role{font-size:11px;color:var(--muted2);letter-spacing:.04em;}
+
+/* ── FAQ ── */
+.faq-section{padding:88px 64px;border-bottom:.5px solid var(--border);}
+.faq-layout{display:grid;grid-template-columns:1fr 1.6fr;gap:72px;margin-top:52px;align-items:start;}
+.faq-sidebar-title{font-family:'Playfair Display',serif;font-size:28px;font-weight:600;color:var(--text);line-height:1.3;margin-bottom:16px;}
+.faq-sidebar-sub{font-size:14px;color:var(--muted);line-height:1.75;margin-bottom:28px;}
+.faq-list{display:flex;flex-direction:column;}
+.faq-item{border-bottom:.5px solid var(--border);}
+.faq-item:first-child{border-top:.5px solid var(--border);}
+.faq-q{width:100%;display:flex;justify-content:space-between;align-items:center;padding:20px 0;cursor:pointer;background:none;border:none;text-align:left;gap:16px;font-family:'DM Sans',sans-serif;}
+.faq-q-text{font-size:15px;font-weight:400;color:var(--text);line-height:1.5;}
+.faq-icon{width:28px;height:28px;min-width:28px;border-radius:50%;border:.5px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--muted);transition:all .25s;flex-shrink:0;}
+.faq-item.open .faq-icon{border-color:var(--accent);color:var(--accent);transform:rotate(45deg);}
+.faq-item.open .faq-q-text{color:var(--accent);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .25s ease;}
+.faq-item.open .faq-a{max-height:300px;padding-bottom:20px;}
+.faq-a-text{font-size:14px;color:var(--muted);line-height:1.8;padding-right:44px;}
+.faq-a-tag{display:inline-block;margin-top:10px;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);border:.5px solid rgba(200,169,110,.2);padding:3px 10px;border-radius:2px;}
+
+/* ── CTA ── */
+.cta-section{padding:96px 64px;text-align:center;position:relative;overflow:hidden;}
+.cta-section::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:640px;height:320px;background:radial-gradient(ellipse,rgba(200,169,110,0.055) 0%,transparent 70%);pointer-events:none;}
+.cta-title{font-family:'Playfair Display',serif;font-size:46px;font-weight:600;color:var(--text);line-height:1.2;margin-bottom:16px;position:relative;}
+.cta-sub{font-size:15px;color:var(--muted);margin-bottom:40px;position:relative;}
+.cta-btns{display:flex;gap:14px;justify-content:center;position:relative;}
+
+/* ── FOOTER ── */
+footer{padding:28px 64px;border-top:.5px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
+.footer-logo{font-family:'Playfair Display',serif;font-size:15px;color:var(--muted);text-decoration:none;}
+.footer-logo span{color:var(--accent);}
+.footer-links{display:flex;gap:28px;}
+.footer-links a{font-size:12px;color:var(--muted2);text-decoration:none;letter-spacing:.05em;transition:color .2s;}
+.footer-links a:hover{color:var(--muted);}
+.footer-copy{font-size:11px;color:var(--muted2);letter-spacing:.04em;}
+
+/* ── SCROLL REVEAL ── */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ NAV ═══════════ -->
+<nav>
+  <a class="nav-logo" href="#">Studio<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#proyectos">Proyectos</a></li>
+    <li><a href="#experiencia">Experiencia</a></li>
+    <li><a href="#proceso">Proceso</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <a class="btn-outline" href="#contacto">Contactar</a>
+</nav>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero">
+  <div class="reveal">
+    <div class="hero-badge">Desarrollador Full Stack</div>
+    <h1>Soluciones digitales<br>con <em>precisión</em><br>y propósito.</h1>
+    <p>Diseño y desarrollo experiencias web que combinan estrategia, técnica y estética para hacer crecer tu negocio.</p>
+    <div class="hero-btns">
+      <button class="btn-primary">Ver portafolio</button>
+      <button class="btn-ghost">Hablemos</button>
+    </div>
+    <div class="hero-stats">
+      <div><div class="stat-num">5<span>+</span></div><div class="stat-label">Años de experiencia</div></div>
+      <div><div class="stat-num">40<span>+</span></div><div class="stat-label">Proyectos entregados</div></div>
+      <div><div class="stat-num">98<span>%</span></div><div class="stat-label">Clientes satisfechos</div></div>
+    </div>
+  </div>
+  <div class="hero-visual reveal">
+    <div class="hero-img">
+      <div class="hero-img-bg"></div>
+      <div class="hero-img-ring"></div>
+      <div class="hero-img-line"></div>
+      <div class="hero-img-label">
+        <span>Tu foto aquí</span>
+        <div class="hero-dot"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ ABOUT ═══════════ -->
+<section class="about-section">
+  <div class="about-avatar-wrap reveal">
+    <div class="about-avatar"><div class="avatar-body"></div></div>
+    <div class="avatar-ring"></div>
+  </div>
+  <div class="reveal">
+    <div class="about-name">Carlos Mendoza</div>
+    <div class="about-role">Desarrollador & Consultor Digital</div>
+    <p class="about-bio">Soy un desarrollador apasionado por crear productos digitales que generan impacto real. Trabajo con startups, agencias y empresas que buscan llevar sus ideas al siguiente nivel con código limpio, diseño intuitivo y entrega confiable.</p>
+    <div class="about-tags">
+      <span class="tag">React / Next.js</span>
+      <span class="tag">Node.js</span>
+      <span class="tag">UI/UX Design</span>
+      <span class="tag">APIs & Backends</span>
+      <span class="tag">Consultoría</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FEATURES ═══════════ -->
+<section class="features-section" id="servicios">
+  <div class="section-header-center reveal">
+    <div class="section-eyebrow">Lo que ofrezco</div>
+    <div class="section-title">Servicios diseñados<br>para crecer contigo</div>
+    <p class="section-sub">Cada proyecto es tratado con atención total, desde la estrategia hasta la entrega final.</p>
+  </div>
+  <div class="features-grid reveal">
+    <div class="feat-card"><div class="feat-num">01</div><div class="feat-title">Desarrollo Web</div><p class="feat-desc">Sitios y aplicaciones web rápidas, accesibles y optimizadas para conversión y escalabilidad.</p><div class="feat-arrow">→</div></div>
+    <div class="feat-card"><div class="feat-num">02</div><div class="feat-title">Diseño UI/UX</div><p class="feat-desc">Interfaces que combinan estética profesional con experiencia de usuario clara y eficiente.</p><div class="feat-arrow">→</div></div>
+    <div class="feat-card"><div class="feat-num">03</div><div class="feat-title">Consultoría Técnica</div><p class="feat-desc">Estrategia tecnológica, revisión de código y arquitectura para equipos que quieren escalar.</p><div class="feat-arrow">→</div></div>
+  </div>
+</section>
+
+<!-- ═══════════ PROJECTS ═══════════ -->
+<section class="projects-section" id="proyectos">
+  <div class="projects-header reveal">
+    <div>
+      <div class="section-eyebrow">Portafolio</div>
+      <div class="section-title">Proyectos<br>destacados</div>
+    </div>
+    <button class="btn-outline">Ver todos →</button>
+  </div>
+  <div class="projects-grid reveal">
+    <div class="proj-card featured">
+      <div class="proj-thumb t1">
+        <div class="proj-thumb-bg"></div>
+        <div class="proj-thumb-grid"></div>
+        <div class="proj-tag-badge">Destacado</div>
+        <div class="proj-thumb-label">Vista previa del proyecto</div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-title">Plataforma E-commerce B2B</div>
+        <p class="proj-desc">Sistema completo de comercio electrónico para distribuidoras mayoristas con panel administrativo, gestión de inventario en tiempo real e integración con pasarelas de pago locales e internacionales.</p>
+        <div class="proj-badges">
+          <span class="proj-badge-accent">+120% ventas</span>
+          <span class="proj-badge-muted">Entregado en 8 semanas</span>
+        </div>
+        <div class="proj-footer">
+          <div class="proj-stack"><span class="proj-chip">Next.js</span><span class="proj-chip">Node.js</span><span class="proj-chip">PostgreSQL</span><span class="proj-chip">Stripe</span></div>
+          <span class="proj-arrow">→</span>
+        </div>
+      </div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-thumb t2"><div class="proj-thumb-bg"></div><div class="proj-thumb-grid"></div><div class="proj-tag-badge">SaaS</div><div class="proj-thumb-label">Vista previa</div></div>
+      <div class="proj-body">
+        <div class="proj-title">Dashboard de Analíticas</div>
+        <p class="proj-desc">Panel en tiempo real para equipos de marketing con visualización de métricas, reportes automatizados y alertas inteligentes.</p>
+        <div class="proj-footer"><div class="proj-stack"><span class="proj-chip">React</span><span class="proj-chip">D3.js</span><span class="proj-chip">Firebase</span></div><span class="proj-arrow">→</span></div>
+      </div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-thumb t3"><div class="proj-thumb-bg"></div><div class="proj-thumb-grid"></div><div class="proj-tag-badge">Mobile</div><div class="proj-thumb-label">Vista previa</div></div>
+      <div class="proj-body">
+        <div class="proj-title">App de Gestión de Turnos</div>
+        <p class="proj-desc">Aplicación móvil para clínicas y centros médicos con agenda online, recordatorios automáticos y gestión de pacientes.</p>
+        <div class="proj-footer"><div class="proj-stack"><span class="proj-chip">React Native</span><span class="proj-chip">Supabase</span></div><span class="proj-arrow">→</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ EXPERIENCE ═══════════ -->
+<section class="exp-section" id="experiencia">
+  <div class="reveal">
+    <div class="section-eyebrow">Trayectoria</div>
+    <div class="section-title">Experiencia &<br>Habilidades</div>
+  </div>
+  <div class="exp-layout">
+    <div class="reveal">
+      <div class="timeline">
+        <div class="timeline-track"></div>
+        <div class="exp-item">
+          <div class="exp-dot active"><div class="exp-dot-inner"></div></div>
+          <div class="exp-period">2022 — Presente</div>
+          <div class="exp-role">Desarrollador Full Stack Senior</div>
+          <div class="exp-company">Freelance & Consultoría Independiente</div>
+          <p class="exp-detail">Desarrollo de productos digitales a medida para startups y empresas de Latinoamérica. Liderazgo técnico en proyectos de e-commerce, SaaS y plataformas educativas.</p>
+        </div>
+        <div class="exp-item">
+          <div class="exp-dot"><div class="exp-dot-inner"></div></div>
+          <div class="exp-period">2020 — 2022</div>
+          <div class="exp-role">Desarrollador Frontend</div>
+          <div class="exp-company">Agencia Digital Nexo — Lima, Perú</div>
+          <p class="exp-detail">Desarrollo de interfaces para campañas digitales, landing pages de alto rendimiento y aplicaciones React para clientes de retail y banca.</p>
+        </div>
+        <div class="exp-item">
+          <div class="exp-dot"><div class="exp-dot-inner"></div></div>
+          <div class="exp-period">2018 — 2020</div>
+          <div class="exp-role">Desarrollador Junior</div>
+          <div class="exp-company">Startup Fintech — Cajamarca, Perú</div>
+          <p class="exp-detail">Construcción de módulos de backend en Node.js e integración con APIs de pago. Primer contacto con entornos de producción y metodologías ágiles.</p>
+        </div>
+      </div>
+      <div class="edu-cards">
+        <div class="edu-label">Formación</div>
+        <div class="edu-card"><div class="edu-icon">🎓</div><div><div class="edu-name">Ing. de Sistemas e Informática</div><div class="edu-inst">Universidad Nacional de Cajamarca</div><div class="edu-year">2014 – 2019</div></div></div>
+        <div class="edu-card"><div class="edu-icon">📜</div><div><div class="edu-name">Full Stack Development</div><div class="edu-inst">Platzi Expert — Certificación</div><div class="edu-year">2021</div></div></div>
+      </div>
+    </div>
+    <div class="skills-block reveal">
+      <div class="skills-title">Nivel de dominio técnico</div>
+      <div class="skill-row"><div class="skill-top"><span class="skill-name">React / Next.js</span><span class="skill-pct">95%</span></div><div class="skill-bar"><div class="skill-fill" style="width:95%"></div></div></div>
+      <div class="skill-row"><div class="skill-top"><span class="skill-name">Node.js / Express</span><span class="skill-pct">90%</span></div><div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div></div>
+      <div class="skill-row"><div class="skill-top"><span class="skill-name">UI/UX Design</span><span class="skill-pct">85%</span></div><div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div></div>
+      <div class="skill-row"><div class="skill-top"><span class="skill-name">PostgreSQL / MongoDB</span><span class="skill-pct">82%</span></div><div class="skill-bar"><div class="skill-fill" style="width:82%"></div></div></div>
+      <div class="skill-row"><div class="skill-top"><span class="skill-name">React Native</span><span class="skill-pct">75%</span></div><div class="skill-bar"><div class="skill-fill" style="width:75%"></div></div></div>
+      <div class="skill-row"><div class="skill-top"><span class="skill-name">DevOps / AWS</span><span class="skill-pct">68%</span></div><div class="skill-bar"><div class="skill-fill" style="width:68%"></div></div></div>
+      <div class="stat-mini-grid">
+        <div class="stat-mini"><div class="stat-mini-num">8<span>+</span></div><div class="stat-mini-label">Años de experiencia</div></div>
+        <div class="stat-mini"><div class="stat-mini-num">40<span>+</span></div><div class="stat-mini-label">Proyectos entregados</div></div>
+        <div class="stat-mini"><div class="stat-mini-num">15<span>+</span></div><div class="stat-mini-label">Clientes activos</div></div>
+        <div class="stat-mini"><div class="stat-mini-num">4<span>★</span></div><div class="stat-mini-label">Rating promedio</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ PROCESO ═══════════ -->
+<section class="proceso-section" id="proceso">
+  <div class="proceso-header reveal">
+    <div class="section-eyebrow">Metodología</div>
+    <div class="section-title">Cómo trabajo<br>contigo</div>
+    <p class="section-sub">Un proceso claro, sin sorpresas. Desde la primera llamada hasta el lanzamiento, sabrás exactamente en qué etapa está tu proyecto.</p>
+  </div>
+  <div class="proceso-steps reveal">
+    <div class="step">
+      <div class="step-num-wrap"><div class="step-num active">01</div><div class="step-pulse"></div></div>
+      <div class="step-icon">🎯</div>
+      <div class="step-title">Descubrimiento</div>
+      <p class="step-desc">Entiendo tu negocio, objetivos y público. Definimos el alcance real del proyecto juntos.</p>
+      <span class="step-duration">1–2 días</span>
+    </div>
+    <div class="step">
+      <div class="step-num-wrap"><div class="step-num">02</div></div>
+      <div class="step-icon">📐</div>
+      <div class="step-title">Propuesta & Plan</div>
+      <p class="step-desc">Recibes una propuesta detallada con tiempos, costos y entregables claros. Sin letra pequeña.</p>
+      <span class="step-duration">2–3 días</span>
+    </div>
+    <div class="step">
+      <div class="step-num-wrap"><div class="step-num">03</div></div>
+      <div class="step-icon">⚡</div>
+      <div class="step-title">Desarrollo</div>
+      <p class="step-desc">Trabajo en sprints semanales con reportes de avance. Tú ves el progreso en tiempo real.</p>
+      <span class="step-duration">2–8 semanas</span>
+    </div>
+    <div class="step">
+      <div class="step-num-wrap"><div class="step-num">04</div></div>
+      <div class="step-icon">🚀</div>
+      <div class="step-title">Lanzamiento</div>
+      <p class="step-desc">Deploy, pruebas finales y entrega del proyecto. Soporte incluido por 30 días post-lanzamiento.</p>
+      <span class="step-duration">1–2 días</span>
+    </div>
+  </div>
+  <div class="proceso-strip reveal">
+    <div class="strip-item"><div class="strip-icon">💬</div><div><div class="strip-title">Comunicación constante</div><p class="strip-desc">Canal directo vía WhatsApp o Slack. Respondo en menos de 4 horas en horario laboral.</p></div></div>
+    <div class="strip-item"><div class="strip-icon">📋</div><div><div class="strip-title">Revisiones incluidas</div><p class="strip-desc">Cada etapa incluye rondas de feedback. Tu opinión moldea el resultado final.</p></div></div>
+    <div class="strip-item"><div class="strip-icon">🔒</div><div><div class="strip-title">Contrato & NDA</div><p class="strip-desc">Todo proyecto inicia con contrato formal. Tu información y código son 100% confidenciales.</p></div></div>
+  </div>
+</section>
+
+<!-- ═══════════ TESTIMONIALS ═══════════ -->
+<section class="testi-section">
+  <div class="section-header-center reveal">
+    <div class="section-eyebrow">Testimonios</div>
+    <div class="section-title">Lo que dicen<br>mis clientes</div>
+  </div>
+  <div class="testi-grid reveal">
+    <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-quote">"Entregó el proyecto antes de tiempo y con una calidad que superó todas nuestras expectativas. Sin duda lo volvemos a contratar."</p><div class="testi-author"><div class="testi-avatar"><div class="testi-avatar-body"></div></div><div><div class="testi-name">Ana Torres</div><div class="testi-role">CEO — Startup Lima</div></div></div></div>
+    <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-quote">"Su trabajo transformó por completo nuestra presencia digital. Profesional, comunicativo y con un ojo increíble para el diseño."</p><div class="testi-author"><div class="testi-avatar"><div class="testi-avatar-body"></div></div><div><div class="testi-name">Diego Ramírez</div><div class="testi-role">Fundador — Agencia Creativa</div></div></div></div>
+    <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-quote">"La nueva landing page triplicó nuestra tasa de conversión en el primer mes. Altamente recomendado para cualquier negocio serio."</p><div class="testi-author"><div class="testi-avatar"><div class="testi-avatar-body"></div></div><div><div class="testi-name">María Fuentes</div><div class="testi-role">Directora de Marketing</div></div></div></div>
+    <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-quote">"Excelente comunicación en todo el proceso. Entiende exactamente lo que el negocio necesita y lo traduce en código impecable."</p><div class="testi-author"><div class="testi-avatar"><div class="testi-avatar-body"></div></div><div><div class="testi-name">Luis Herrera</div><div class="testi-role">CTO — Empresa Tecnológica</div></div></div></div>
+  </div>
+</section>
+
+<!-- ═══════════ FAQ ═══════════ -->
+<section class="faq-section" id="faq">
+  <div class="reveal"><div class="section-eyebrow">FAQ</div></div>
+  <div class="faq-layout">
+    <div class="reveal">
+      <div class="faq-sidebar-title">¿Tienes alguna<br>pregunta?</div>
+      <p class="faq-sidebar-sub">Estas son las dudas más comunes de mis clientes antes de arrancar. Si no encuentras lo que buscas, escríbeme directamente.</p>
+      <button class="btn-outline">Hacer una pregunta →</button>
+    </div>
+    <div class="faq-list reveal" id="faqList">
+      <div class="faq-item open">
+        <button class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">¿Cuánto cuesta un proyecto web?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a"><p class="faq-a-text">Depende del alcance, pero como referencia: una landing page profesional parte desde $400 USD, un sitio web completo desde $900 USD y una aplicación web desde $2,000 USD. Siempre recibirás una cotización detallada antes de comprometerte con nada.</p><span class="faq-a-tag">Transparencia total</span></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">¿En cuánto tiempo tienes listo mi proyecto?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a"><p class="faq-a-text">Una landing page tarda entre 1 y 2 semanas. Un sitio completo entre 3 y 5 semanas. Un sistema o app web puede tomar entre 6 y 12 semanas según la complejidad. Te entrego fechas exactas en la propuesta inicial.</p><span class="faq-a-tag">Entrega puntual garantizada</span></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">¿Cómo es el proceso de pago?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a"><p class="faq-a-text">Trabajo con un esquema de 50% al inicio y 50% al entregar el proyecto. Para proyectos grandes uso hitos de pago parciales. Acepto transferencia bancaria, PayPal y Yape / Plin dentro de Perú.</p><span class="faq-a-tag">Sin riesgos</span></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">¿Qué pasa si no me gusta el resultado?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a"><p class="faq-a-text">Cada etapa incluye revisiones hasta que estés satisfecho. Trabajo de forma iterativa precisamente para evitar sorpresas al final. Si en algún punto el proyecto no cumple lo acordado, lo corrijo sin costo adicional.</p><span class="faq-a-tag">Satisfacción garantizada</span></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">¿Puedo pedirte cambios después del lanzamiento?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a"><p class="faq-a-text">Sí. Incluyo 30 días de soporte gratuito post-lanzamiento para correcciones menores. Para cambios mayores o mantenimiento continuo tenemos planes mensuales disponibles desde $150 USD/mes.</p><span class="faq-a-tag">Soporte continuo</span></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">¿Trabajas con clientes fuera de Perú?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a"><p class="faq-a-text">¡Absolutamente! Trabajo con clientes de toda Latinoamérica, España y Estados Unidos. La comunicación es 100% remota y me adapto a tu zona horaria para las reuniones de seguimiento.</p><span class="faq-a-tag">100% remoto</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CTA ═══════════ -->
+<section class="cta-section" id="contacto">
+  <div class="reveal">
+    <div class="cta-title">¿Listo para construir<br>algo extraordinario?</div>
+    <p class="cta-sub">Hablemos sobre tu proyecto. Primera consulta sin costo.</p>
+    <div class="cta-btns">
+      <button class="btn-primary">Agendar llamada</button>
+      <button class="btn-ghost">Ver portafolio</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer>
+  <a class="footer-logo" href="#">Studio<span>.</span></a>
+  <div class="footer-links">
+    <a href="#servicios">Servicios</a>
+    <a href="#proyectos">Proyectos</a>
+    <a href="#experiencia">Experiencia</a>
+    <a href="#contacto">Contacto</a>
+  </div>
+  <div class="footer-copy">© 2026 — Todos los derechos reservados</div>
+</footer>
+
+<script>
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
